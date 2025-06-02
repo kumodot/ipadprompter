@@ -9,10 +9,30 @@ body {
   position: fixed;
   top: 10px;
   left: 10px;
-  background: rgba(0,0,0,0.8);
-  padding: 10px;
-  border-radius: 8px;
   z-index: 1000;
+}
+.control-background {
+  background: rgba(0, 0, 0, 0.85);
+  padding: 15px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.control-background label,
+.control-background button {
+  font-size: 20px;
+  padding: 8px;
+}
+.control-background button {
+  background-color: #444;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.control-background button:hover {
+  background-color: #666;
 }
 .hidden {
   display: none;

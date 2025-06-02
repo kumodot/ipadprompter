@@ -17,12 +17,12 @@ function toggleEdit() {
 
 function togglePlay() {
   playing = !playing;
-  document.getElementById('playPause').innerText = playing ? '⏸️' : '▶️';
+  document.getElementById('playPause').innerText = playing ? 'PAUSE' : 'PLAY';
 }
 
 function loop() {
   if (playing) {
-    teleprompter.scrollBy(0, scrollSpeed);
+    teleprompter.scrollTop += scrollSpeed;
   }
   requestAnimationFrame(loop);
 }
@@ -36,9 +36,12 @@ editor.oninput = updateText;
 document.body.onclick = () => controls.classList.toggle('hidden');
 
 document.addEventListener('keydown', (e) => {
-  if (e.code === 'Space') togglePlay();
+  if (e.code === 'Space') {
+    e.preventDefault();
+    togglePlay();
+  }
   if (e.code === 'ArrowUp') scrollSpeed += 0.2;
-  if (e.code === 'ArrowDown') teleprompter.scrollBy(0, -50);
+  if (e.code === 'ArrowDown') teleprompter.scrollTop -= 50;
 });
 
 window.addEventListener("gamepadconnected", () => {
@@ -48,7 +51,7 @@ window.addEventListener("gamepadconnected", () => {
     if (gp) {
       if (gp.buttons[0].pressed) togglePlay(); // A button
       if (gp.buttons[4].pressed) scrollSpeed += 0.1; // L1
-      if (gp.buttons[5].pressed) teleprompter.scrollBy(0, -5); // R1
+      if (gp.buttons[5].pressed) teleprompter.scrollTop -= 5; // R1
     }
     requestAnimationFrame(gamepadLoop);
   }
